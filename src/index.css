@@ -27,3 +27,7 @@
     margin: 3px 2px;
     cursor: pointer;
 }
+
+.active{
+    background-color: aqua;
+}

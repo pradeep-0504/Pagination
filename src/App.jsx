@@ -35,17 +35,26 @@ function App(){
     setCurrentPage(n);
   }
 
+  const goToPrevPage=()=>{
+    setCurrentPage((prev)=>Math.max(prev-1,0));
+  }
+const goToNextPage=()=>{
+    setCurrentPage((prev)=>Math.min(prev+1,numberof_pages-1));
+  }
+
   return !products.length?(
     <h1>No products found</h1>
   ):(
   
     <div className="app">
     <h1>Pagination</h1>
+    <button disabled={currentPage===0} className="page-number" onClick={goToPrevPage}>👈</button>
     {[...Array(numberof_pages).keys()].map((n)=>(
-      <span className="page-number" key={n} onClick={()=>handlePageChange(n)}>
-        {n}
-        </span>
+      <button className={"page-number" + (n===currentPage ? " active" : "")} key={n} onClick={()=>handlePageChange(n)}>
+        {n+1}
+        </button>
       )) }
+      <button disabled={currentPage===numberof_pages-1} className="page-number" onClick={goToNextPage}> 👉</button>
     <div className="products-container">
     { 
       products.slice(start,end).map((p)=>(
